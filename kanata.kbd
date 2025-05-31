@@ -1,0 +1,107 @@
+;; -*- mode: lisp -*-
+;; defsrc is still necessary
+
+
+(defcfg
+  process-unmapped-keys yes
+  movemouse-inherit-accel-state yes
+  )
+
+;; (defsrc
+;;     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+;;     tab  q w e r t y u i o p [ ] \
+;;     caps a s d f g h j k l ; ' ret
+;;     lsft z x c v b n m , . / rsft
+;;     spc
+;;     )
+
+(defsrc
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  caps a    s    d    f    g    h    j    k    l    ;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           spc            ralt rmet rctl
+)
+
+(defvar
+  tap-time 150
+  hold-time 200
+)
+
+(defalias
+  escctrl (tap-hold 100 100 esc lctl)
+  a (multi f24 (tap-hold $tap-time $hold-time a lmet))
+  s (multi f24 (tap-hold $tap-time $hold-time s lalt))
+  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
+  f (multi f24 (tap-hold $tap-time $hold-time f lctl))
+  j (multi f24 (tap-hold $tap-time $hold-time j rctl))
+  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
+  l (multi f24 (tap-hold $tap-time $hold-time l ralt))
+  ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
+  sptog (multi f24 (tap-hold $tap-time $hold-time spc (layer-toggle redmove)))
+  )
+
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @escctrl @a @s @d @f g h @j @k @l @;    '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           @sptog            ralt rmet rctl
+  
+)
+
+(defalias
+  lbase (multi f24 (tap-hold $tap-time $hold-time (layer-switch base) lmet))
+  lmove (multi f24 (tap-hold $tap-time $hold-time (layer-switch move) lalt))
+  f-ret (multi f24 (tap-hold $tap-time $hold-time ret lctl))
+  g-is-\ (multi f24 (tap-hold $tap-time $hold-time \ lalt))
+  sp-j (multi f24 (tap-hold $tap-time $hold-time bspc rctl))
+  sp-h (multi f24 (tap-hold $tap-time $hold-time del lmet))
+)
+
+(deflayer redmove
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab lrld  w    e    r    t    y    u    i    o    p    [    ]    \
+  @escctrl @lbase @lmove @d @f-ret @g-is-\ @sp-h @sp-j @k @l @; '  ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           _            ralt rmet rctl
+    )
+
+(defvar
+  mm-interval 10
+  mm-distance 2
+  accel-time 1000
+  mm-mindist 1
+  mm-maxdist 50
+  )
+
+(defalias
+  mwu (mwheel-up 50 120)
+  mwd (mwheel-down 50 120)
+  mwl (mwheel-left 50 120)
+  mwr (mwheel-right 50 120)
+
+  ms↑ (movemouse-up $mm-interval $mm-distance)
+  ms← (movemouse-left $mm-interval $mm-distance)
+  ms↓ (movemouse-down $mm-interval $mm-distance)
+  ms→ (movemouse-right $mm-interval $mm-distance)
+
+  ma↑ (movemouse-accel-up $mm-interval $accel-time $mm-mindist $mm-maxdist)
+  ma← (movemouse-accel-left $mm-interval $accel-time $mm-mindist $mm-maxdist)
+  ma↓ (movemouse-accel-down $mm-interval $accel-time $mm-mindist $mm-maxdist)
+  ma→ (movemouse-accel-right $mm-interval $accel-time $mm-mindist $mm-maxdist)
+
+  sm (setmouse 32228 32228)
+
+  fst (movemouse-speed 500)
+  slw (movemouse-speed 1)
+  )
+
+(deflayer move
+  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @escctrl @a @s @d   @f   g  @ma←  @ma↓ @ma↑ @ma→  ;   '    ret
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           @sptog            ralt rmet rctl
+  )
+
