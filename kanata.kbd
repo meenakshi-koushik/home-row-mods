@@ -24,12 +24,12 @@
 )
 
 (defvar
-  tap-time 150
+  tap-time 200
   hold-time 200
 )
 
 (defalias
-  escctrl (tap-hold 100 100 esc lctl)
+  ec (tap-hold 100 100 esc (layer-while-held dir))
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
   d (multi f24 (tap-hold $tap-time $hold-time d lsft))
@@ -44,26 +44,16 @@
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @escctrl @a @s @d @f g h @j @k @l @;    '    ret
+  @ec  @a   @s   @d   @f   g    h   @j   @k   @l   @;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           @sptog            ralt rmet rctl
-  
-)
-
-(defalias
-  lbase (multi f24 (tap-hold $tap-time $hold-time (layer-switch base) lmet))
-  lmove (multi f24 (tap-hold $tap-time $hold-time (layer-switch move) lalt))
-  f-ret (multi f24 (tap-hold $tap-time $hold-time ret lctl))
-  g-is-\ (multi f24 (tap-hold $tap-time $hold-time \ lalt))
-  sp-j (multi f24 (tap-hold $tap-time $hold-time bspc rctl))
-  sp-h (multi f24 (tap-hold $tap-time $hold-time del lmet))
 )
 
 (deflayer redmove
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab lrld  w    e    r    t    y    u    i    o    p    [    ]    \
-  @escctrl @lbase @lmove @d @f-ret @g-is-\ @sp-h @sp-j @k @l @; '  ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    -    =    bspc
+  lrld   1   2    3    4    5    6    7     8    9    0    [    ]    \
+  @ec   @a  @s  @d   @f   [    ]    @j    @k   @l    @;    `    ret
+  lsft    /    =    -    ret    bspc   del    \    -    =    /    rsft
   lctl lmet lalt           _            ralt rmet rctl
     )
 
@@ -97,11 +87,10 @@
   slw (movemouse-speed 1)
   )
 
-(deflayer move
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @escctrl @a @s @d   @f   g  @ma←  @ma↓ @ma↑ @ma→  ;   '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           @sptog            ralt rmet rctl
-  )
-
+(deflayer dir
+    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    tab @ma← @ma↓ @ma↑ @ma→    ∅    ∅     ⇤    ⇥    ∅    ∅   ∅    ∅    ∅
+    @ec  lmet lalt lsft lctl   g      ◀   ▼    ▲    ▶    ∅    ∅    ret
+    lsft   @mwl @mwd @mwu @mwr    ⇞     ⇟  mlft mmid mrgt  @fst @fst
+    lctl lmet lalt          @sptog           ralt rmet rctl
+)
