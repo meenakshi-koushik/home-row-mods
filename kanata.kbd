@@ -50,7 +50,7 @@
 )
 
 (deflayer redmove
-  grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    -    =    bspc
+  grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    f11   f12  bspc
   lrld   1   2    3    4    5    6    7     8    9    0    [    ]    \
   @ec   @a  @s  @d   @f   [    ]    @j    @k   @l    @;    `    ret
   lsft    /    =    -    ret    bspc   del    \    -    =    /    rsft
@@ -89,8 +89,8 @@
 
 (deflayer dir
     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-    tab @ma← @ma↓ @ma↑ @ma→    ∅    ∅     ⇤    ⇥    ∅    ∅   ∅    ∅    ∅
-    @ec  lmet lalt lsft lctl   g      ◀   ▼    ▲    ▶    ∅    ∅    ret
-    lsft   @mwl @mwd @mwu @mwr    ⇞     ⇟  mlft mmid mrgt  @fst @fst
+    tab @ma← @ma↓ @ma↑ @ma→    ∅    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
+    @ec  lmet lalt lsft lctl   ∅      ◀   ▼    ▲    ▶  @mwd  @mwu  ret
+    lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
