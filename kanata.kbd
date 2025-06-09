@@ -49,11 +49,22 @@
   lctl lmet lalt           @sptog            ralt rmet rctl
 )
 
+(defalias
+  tg (multi f24 (tap-hold $tap-time $hold-time tab lmet))
+  [alt (multi f24 (tap-hold $tap-time $hold-time [ lalt))
+  ]sft (multi f24 (tap-hold $tap-time $hold-time ] lsft))
+  \ctl (multi f24 (tap-hold $tap-time $hold-time \ lctl))
+  |ctl (multi f24 (tap-hold $tap-time $hold-time S-\ rctl))
+  {sft (multi f24 (tap-hold $tap-time $hold-time S-[ rsft))
+  }alt (multi f24 (tap-hold $tap-time $hold-time S-] ralt))
+  tr (multi f24 (tap-hold $tap-time $hold-time tab rmet))
+  )
+
 (deflayer redmove
   grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    f11   f12  bspc
   lrld   1   2    3    4    5    6    7     8    9    0    [    ]    \
-  @ec   @a  @s  @d   @f   [    ]    @j    @k   @l    @;    `    ret
-  lsft    /    =    -    ret    bspc   del    \    -    =    /    rsft
+  @ec   @tg @[alt @]sft @\ctl S-9   S-0  @|ctl @{sft @}alt  @tr   `    ret
+  lsft    <     =    -  ret  del  bspc   \    -     =   S-<   rsft
   lctl lmet lalt           _            ralt rmet rctl
     )
 
