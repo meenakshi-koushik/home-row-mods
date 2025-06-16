@@ -1,4 +1,5 @@
 ;; -*- mode: lisp -*-
+
 ;; defsrc is still necessary
 
 
@@ -28,12 +29,14 @@
   hold-time 200
 )
 
+
 (defalias
   ec (tap-hold 100 100 esc (layer-while-held dir))
   a (multi f24 (tap-hold $tap-time $hold-time a lmet))
   s (multi f24 (tap-hold $tap-time $hold-time s lalt))
   d (multi f24 (tap-hold $tap-time $hold-time d lsft))
   f (multi f24 (tap-hold $tap-time $hold-time f lctl))
+  g (multi f24 (tap-hold $tap-time $hold-time g (layer-while-held dir)))
   j (multi f24 (tap-hold $tap-time $hold-time j rctl))
   k (multi f24 (tap-hold $tap-time $hold-time k rsft))
   l (multi f24 (tap-hold $tap-time $hold-time l ralt))
@@ -44,7 +47,7 @@
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @ec  @a   @s   @d   @f   g    h   @j   @k   @l   @;    '    ret
+  @ec  @a   @s   @d   @f  @g    h   @j   @k   @l   @;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           @sptog            ralt rmet rctl
 )
@@ -53,8 +56,8 @@
   tg (multi f24 (tap-hold $tap-time $hold-time tab lmet))
   [alt (multi f24 (tap-hold $tap-time $hold-time [ lalt))
   ]sft (multi f24 (tap-hold $tap-time $hold-time ] lsft))
-  \ctl (multi f24 (tap-hold $tap-time $hold-time \ lctl))
-  |ctl (multi f24 (tap-hold $tap-time $hold-time S-\ rctl))
+  bspctl (multi f24 (tap-hold $tap-time $hold-time bspc lctl))
+  retctl (multi f24 (tap-hold $tap-time $hold-time ret rctl))
   {sft (multi f24 (tap-hold $tap-time $hold-time S-[ rsft))
   }alt (multi f24 (tap-hold $tap-time $hold-time S-] ralt))
   tr (multi f24 (tap-hold $tap-time $hold-time tab rmet))
@@ -63,8 +66,8 @@
 (deflayer redmove
   grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    f11   f12  bspc
   lrld   1   2    3    4    5    6    7     8    9    0    [    ]    \
-  @ec   @tg @[alt @]sft @\ctl S-9   S-0  @|ctl @{sft @}alt  @tr   `    ret
-  lsft    <     =    -  ret  del  bspc   \    -     =   S-<   rsft
+  @ec   @tg @[alt @]sft @bspctl S-9 S-0 @retctl @{sft @}alt  @tr   `    ret
+  lsft    <     =     -      del  ret S-\   \    -     =   S-<   rsft
   lctl lmet lalt           _            ralt rmet rctl
     )
 
@@ -100,7 +103,7 @@
 
 (deflayer dir
     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-    tab @ma← @ma↓ @ma↑ @ma→    ∅    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
+    tab  ∅   @ma← @ma↓ @ma↑ @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
     @ec  lmet lalt lsft lctl   ∅      ◀   ▼    ▲    ▶  @mwd  @mwu  ret
     lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
