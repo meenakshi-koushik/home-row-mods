@@ -37,6 +37,7 @@
   d (multi f24 (tap-hold $tap-time $hold-time d lsft))
   f (multi f24 (tap-hold $tap-time $hold-time f lctl))
   g (multi f24 (tap-hold $tap-time $hold-time g (layer-while-held dir)))
+  h (multi f24 (tap-hold $tap-time $hold-time h (layer-while-held mom)))
   j (multi f24 (tap-hold $tap-time $hold-time j rctl))
   k (multi f24 (tap-hold $tap-time $hold-time k rsft))
   l (multi f24 (tap-hold $tap-time $hold-time l ralt))
@@ -47,7 +48,7 @@
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @ec  @a   @s   @d   @f  @g    h   @j   @k   @l   @;    '    ret
+  @ec  @a   @s   @d   @f  @g   @h   @j   @k   @l   @;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           @sptog            ralt rmet rctl
 )
@@ -105,6 +106,14 @@
     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
     tab  ∅   @ma← @ma↓ @ma↑ @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
     @ec  lmet lalt lsft lctl   ∅      ◀   ▼    ▲    ▶  @mwd  @mwu  ret
+    lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
+    lctl lmet lalt          @sptog           ralt rmet rctl
+)
+
+(deflayer mom
+    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    tab  ∅   mlft mmid mrgt @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
+    @ec   @ma← @ma↓ @ma↑ @ma→  mlft   ∅  rctl rsft ralt rmet  @mwu  ret
     lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
