@@ -112,8 +112,8 @@
 
 (deflayer mom
     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-    tab  ∅   mlft mmid mrgt @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
-    @ec   @ma← @ma↓ @ma↑ @ma→  mlft   ∅  rctl rsft ralt rmet  @mwu  ret
+    tab  mmid @ma↑ mmid mrgt @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
+    @ec   @ma← @ma↓ @ma→  mlft mrgt  ∅  rctl rsft ralt rmet  @mwu  ret
     lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
