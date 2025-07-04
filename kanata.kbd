@@ -32,7 +32,7 @@
 
 
 (defalias
-  ec (tap-hold 100 100 esc (layer-while-held dir))
+  ec ( multi f24 (tap-hold $tap-time $hold-time (multi caps (layer-switch dir)) (layer-while-held dir)))
   a (multi f24 (tap-hold-except-keys $tap-time $hold-time a lmet (s d f w e r)))
   s (multi f24 (tap-hold-except-keys $tap-time $hold-time s lalt (a d f q e r)))
   d (multi f24 (tap-hold-except-keys $tap-time $hold-time d lsft (a s f q w r)))
@@ -49,7 +49,7 @@
 (deflayer base
   grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
   tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @ec  @a   @s   @d   @f  @g   @h   @j   @k   @l   @;    '    ret
+  @ec  @a   @s   @d   @f   g   @h   @j   @k   @l   @;    '    ret
   lsft z    x    c    v    b    n    m    ,    .    /    rsft
   lctl lmet lalt           @sptog            ralt rmet rctl
 )
@@ -68,8 +68,8 @@
 (deflayer redmove
   grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    f11   f12  bspc
   lrld   1   2    3    4    5    6    7     8    9    0    [    ]    \
-  @ec   @tg @[alt @]sft @bspctl S-9 S-0 @retctl @{sft @}alt  @tr   `    ret
-  lsft    <     =     -      del  ret S-\   \    -     =   S-<   rsft
+    _   @tg @[alt @]sft @bspctl S-9 S-0 @retctl @{sft @}alt  @tr   `    ret
+  lsft    <     =     -      del  esc S-\   \    -     =   S-<   rsft
   lctl lmet lalt           _            ralt rmet rctl
     )
 
@@ -98,6 +98,7 @@
   ma→ (movemouse-accel-right $mm-interval $accel-time $mm-mindist $mm-maxdist)
 
   sm (setmouse 32228 32228)
+  eb ( multi f24 (tap-hold $tap-time $hold-time (multi caps (layer-switch base)) (layer-while-held base)))
 
   fst (movemouse-speed 500)
   slw (movemouse-speed 1)
@@ -105,16 +106,16 @@
 
 (deflayer dir
     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-    tab  ∅   @ma← @ma↓ @ma↑ @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
-    @ec  lmet lalt lsft lctl   ∅      ◀   ▼    ▲    ▶  @mwd  @mwu  ret
-    lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
+    mlft  @ma← @ma↓ @ma↑ @ma→  mrgt ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
+    @eb  lmet lalt lsft lctl  mlft   ◀   ▼    ▲    ▶  @mwd  @mwu  ret
+    lsft   @mwl @mwd @mwu @mwr  esc   mlft  ⇟   ⇞  mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
 
 (deflayer mom
     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
     tab  mmid @ma↑ mmid mrgt @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
-    @ec   @ma← @ma↓ @ma→  mlft mrgt  ∅  rctl rsft ralt rmet  @mwu  ret
+    @eb   @ma← @ma↓ @ma→  mlft mrgt  ∅  rctl rsft ralt rmet  @mwu  ret
     lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
