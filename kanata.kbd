@@ -6,6 +6,7 @@
 (defcfg
   process-unmapped-keys yes
   movemouse-inherit-accel-state yes
+  concurrent-tap-hold yes
   )
 
 ;; (defsrc
@@ -32,15 +33,15 @@
 
 (defalias
   ec (tap-hold 100 100 esc (layer-while-held dir))
-  a (multi f24 (tap-hold $tap-time $hold-time a lmet))
-  s (multi f24 (tap-hold $tap-time $hold-time s lalt))
-  d (multi f24 (tap-hold $tap-time $hold-time d lsft))
-  f (multi f24 (tap-hold $tap-time $hold-time f lctl))
+  a (multi f24 (tap-hold-except-keys $tap-time $hold-time a lmet (s d f w e r)))
+  s (multi f24 (tap-hold-except-keys $tap-time $hold-time s lalt (a d f q e r)))
+  d (multi f24 (tap-hold-except-keys $tap-time $hold-time d lsft (a s f q w r)))
+  f (multi f24 (tap-hold-except-keys $tap-time $hold-time f lctl (a s d q w e)))
   g (multi f24 (tap-hold $tap-time $hold-time g (layer-while-held dir)))
   h (multi f24 (tap-hold $tap-time $hold-time h (layer-while-held mom)))
-  j (multi f24 (tap-hold $tap-time $hold-time j rctl))
-  k (multi f24 (tap-hold $tap-time $hold-time k rsft))
-  l (multi f24 (tap-hold $tap-time $hold-time l ralt))
+  j (multi f24 (tap-hold-except-keys $tap-time $hold-time j rctl (k l i o p)))
+  k (multi f24 (tap-hold-except-keys $tap-time $hold-time k rsft (j l u o p)))
+  l (multi f24 (tap-hold-except-keys $tap-time $hold-time l ralt (j k u i p)))
   ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
   sptog (multi f24 (tap-hold $tap-time $hold-time spc (layer-toggle redmove)))
   )
