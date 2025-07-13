@@ -26,8 +26,8 @@
 )
 
 (defvar
-  tap-time 200
-  hold-time 200
+  tap-time 250
+  hold-time 250
 )
 
 
@@ -106,9 +106,9 @@
 
 (deflayer dir
     grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-    mlft  @ma← @ma↓ @ma↑ @ma→  mrgt ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
+    mlft  @ma← @ma↑ @ma↓ @ma→  mrgt ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
     @eb  lmet lalt lsft lctl  mlft   ◀   ▼    ▲    ▶  @mwd  @mwu  ret
-    lsft   @mwl @mwd @mwu @mwr  esc   mlft  ⇟   ⇞  mmid mrgt  @fst
+    lsft   @mwl @mwu @mwd @mwr  esc   mlft  ⇟   ⇞  mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
 
