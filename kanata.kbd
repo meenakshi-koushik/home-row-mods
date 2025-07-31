@@ -38,21 +38,14 @@
   d (multi f24 (tap-hold $tap-time $hold-time d lsft))
   f (multi f24 (tap-hold $tap-time $hold-time f lctl))
   g (multi f24 (tap-hold $tap-time $hold-time g (layer-while-held dir)))
-  h (multi f24 (tap-hold $tap-time $hold-time h (layer-while-held mom)))
+  h (multi f24 (tap-hold $tap-time $hold-time h (layer-while-held dir)))
   j (multi f24 (tap-hold $tap-time $hold-time j rctl))
   k (multi f24 (tap-hold $tap-time $hold-time k rsft))
   l (multi f24 (tap-hold $tap-time $hold-time l ralt))
   ; (multi f24 (tap-hold $tap-time $hold-time ; rmet))
   sptog (multi f24 (tap-hold $tap-time $hold-time spc (layer-toggle redmove)))
+  retog (multi f24 (tap-hold $tap-time $hold-time ret (layer-toggle sym)))
   )
-
-(deflayer base
-  grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
-  @ec  @a   @s   @d   @f   g   @h   @j   @k   @l   @;    '    ret
-  lsft z    x    c    v    b    n    m    ,    .    /    rsft
-  lctl lmet lalt           @sptog            ralt rmet rctl
-)
 
 (defalias
   tg (multi f24 (tap-hold $tap-time $hold-time tab lmet))
@@ -65,11 +58,19 @@
   tr (multi f24 (tap-hold $tap-time $hold-time tab rmet))
   )
 
+(deflayer base
+  grv  1    2    3    4    5    6    7    8    9    0    -    =  @bspctl
+  tab  q    w    e    r    t    y    u    i    o    p    [    ]    \
+  @ec  @a   @s   @d   @f   g   @h   @j   @k   @l   @;    '    @retog
+  lsft z    x    c    v    b    n    m    ,    .    /    rsft
+  lctl lmet lalt           @sptog            ralt rmet rctl
+)
+
 (deflayer redmove
-  grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    f11   f12  bspc
+  grv  f1    f2    f3    f4    f5    f6    f7    f8    f9    f10    f11   f12 @bspctl
   lrld   1   2    3    4    5    6    7     8    9    0    [    ]    \
-    _   @tg @[alt @]sft @bspctl S-9 S-0 @retctl @{sft @}alt  @tr   `    ret
-  lsft    <     =     -      del  esc S-\   \    -     =   S-<   rsft
+    _   @tg @[alt @]sft @bspctl S-9 S-0 @retctl @{sft @}alt  @tr   `    @retog
+  lsft    `     =     -      del  esc S-\   \    +    S-- S-`  rsft
   lctl lmet lalt           _            ralt rmet rctl
     )
 
@@ -105,17 +106,38 @@
   )
 
 (deflayer dir
-    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
-    mlft  @ma← @ma↑ @ma↓ @ma→  mrgt ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
-    @eb  lmet lalt lsft lctl  mlft   ◀   ▼    ▲    ▶  @mwd  @mwu  ret
-    lsft   @mwl @mwu @mwd @mwr  esc   mlft  ⇟   ⇞  mmid mrgt  @fst
+    grv  S-1  S-2  S-3  S-4  S-5  S-6  S-7  S-8   S-9   S-0   -    =    @bspctl
+    mltp @ma←  @ma↑ @ma↓ @ma→  mrtp mftp  mlft mmid mrgt   _  ∅    ∅    ∅
+    @eb  lmet lalt lsft lctl  mmtp   ◀   ▼    ▲    ▶  @mwd  @mwu  @retog
+    lsft  @mwl @mwu @mwd @mwr  mbtp   ⇤   ⇟   ⇞   ⇥   mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
 
+(defalias
+  s1 (multi f24 (tap-hold $tap-time $hold-time S-1 lmet))
+  s2 (multi f24 (tap-hold $tap-time $hold-time S-2 lalt))
+  s3 (multi f24 (tap-hold $tap-time $hold-time S-3 lsft))
+  s4 (multi f24 (tap-hold $tap-time $hold-time S-4 lctl))
+  s5 (multi f24 (tap-hold $tap-time $hold-time S-5 (layer-while-held dir)))
+  s6 (multi f24 (tap-hold $tap-time $hold-time S-6 (layer-while-held dir)))
+  s7 (multi f24 (tap-hold $tap-time $hold-time S-7 rctl))
+  s8 (multi f24 (tap-hold $tap-time $hold-time S-8 rsft))
+  s9 (multi f24 (tap-hold $tap-time $hold-time S-9 ralt))
+  s0 (multi f24 (tap-hold $tap-time $hold-time S-0 rmet))
+  )
+
+(deflayer sym
+  grv   1    2    3    4    5    6    7    8    9    0    -    =  @bspctl
+  tab  f1   f2   f3   f4   f5   f6   f7   f8   f9   f10    [    ]    \
+  _   @s1  @s2  @s3  @s4  @s5  @s6  @s7  @s8  @s9  @s0   '    @retog
+  lsft [    ]    {    }  esc     _    +    -    =  S--    rsft
+  lctl lmet lalt           @sptog            ralt rmet rctl
+)
+
 (deflayer mom
-    grv  1    2    3    4    5    6    7    8    9    0    -    =    bspc
+    grv  1    2    3    4    5    6    7    8    9    0    -    =    @bspctl
     tab  mmid @ma↑ mmid mrgt @ma→    ∅     ⇤    ⇥    @mwd  @mwu   ∅    ∅    ∅
-    @eb   @ma← @ma↓ @ma→  mlft mrgt  ∅  rctl rsft ralt rmet  @mwu  ret
+    @eb   @ma← @ma↓ @ma→  mlft mrgt  ∅  rctl rsft ralt rmet  @mwu  @retog
     lsft   @mwl @mwd @mwu @mwr   ∅     ⇞    ⇟  mlft mmid mrgt  @fst
     lctl lmet lalt          @sptog           ralt rmet rctl
 )
